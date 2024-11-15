@@ -1,13 +1,13 @@
-import { type Controller } from "../protocols/controller";
-import { type HttpRequest, type HttpResponse } from "../protocols/http";
-import { badRequest, created, serverError } from "../helpers/http-helper";
-import { CreateProductUseCase } from "@application/use-cases/create-product";
-import { Validator } from "../protocols/validator";
+import { type Controller } from '../protocols/controller';
+import { type HttpRequest, type HttpResponse } from '../protocols/http';
+import { badRequest, created, serverError } from '../helpers/http-helpers';
+import { CreateProductUseCase } from '@application/use-cases/create-product';
+import { Validator } from '../protocols/validator';
 
 export class CreateProductController implements Controller {
   constructor(
     private readonly createProductUseCase: CreateProductUseCase,
-    private readonly validator: Validator
+    private readonly validator: Validator,
   ) {}
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {

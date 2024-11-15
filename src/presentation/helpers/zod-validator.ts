@@ -1,5 +1,5 @@
-import { type z } from "zod";
-import { type Validator } from "../protocols/validator";
+import { type z } from 'zod';
+import { type Validator } from '../protocols/validator';
 
 export class ZodValidator implements Validator {
   constructor(private readonly zodObject: z.ZodObject<any>) {}

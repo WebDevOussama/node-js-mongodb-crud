@@ -8,6 +8,6 @@ export class Product {
     public category: string,
     public tags: string[],
     public createdAt: Date,
-    public updatedAt: Date
+    public updatedAt: Date,
   ) {}
 }

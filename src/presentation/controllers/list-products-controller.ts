@@ -1,7 +1,7 @@
-import { type Controller } from "../protocols/controller";
-import { type HttpRequest, type HttpResponse } from "../protocols/http";
-import { ListProductsUseCase } from "@application/use-cases/list-products";
-import { ok, serverError } from "../helpers/http-helper";
+import { type Controller } from '../protocols/controller';
+import { type HttpRequest, type HttpResponse } from '../protocols/http';
+import { ListProductsUseCase } from '@application/use-cases/list-products';
+import { ok, serverError } from '../helpers/http-helpers';
 
 export class ListroductsController implements Controller {
   constructor(private readonly listProductsUseCase: ListProductsUseCase) {}

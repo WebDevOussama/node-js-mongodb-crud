@@ -1,10 +1,10 @@
-import { ListroductsController } from "@presentation/controllers/list-products-controller";
-import { ListProductsUseCase } from "@application/use-cases/list-products";
-import { MongoProductRepository } from "@infrastructure/repositories/mongo-product-repository";
-import { CreateProductController } from "@presentation/controllers/create-product-controller";
-import { CreateProductUseCase } from "@application/use-cases/create-product";
-import { ZodValidator } from "@presentation/helpers/zod-validator";
-import { zodCreateProductObject } from "@presentation/helpers/zod-validators/product";
+import { ListroductsController } from '@presentation/controllers/list-products-controller';
+import { ListProductsUseCase } from '@application/use-cases/list-products';
+import { MongoProductRepository } from '@infrastructure/repositories/mongo-product-repository';
+import { CreateProductController } from '@presentation/controllers/create-product-controller';
+import { CreateProductUseCase } from '@application/use-cases/create-product';
+import { ZodValidator } from '@presentation/helpers/zod-validator';
+import { zodCreateProductObject } from '@presentation/helpers/zod-validators/product';
 
 export const makeListProducts = (): ListroductsController => {
   const mongoProductRepository = new MongoProductRepository();
@@ -20,6 +20,6 @@ export const makeCreateProduct = (): CreateProductController => {
 
   return new CreateProductController(
     createProductUseCase,
-    zodCreateProductValidator
+    zodCreateProductValidator,
   );
 };

@@ -1,6 +1,6 @@
-import { type Request, type Response } from "express";
-import { type Controller } from "@presentation/protocols/controller";
-import { type HttpRequest } from "@presentation/protocols/http";
+import { type Request, type Response } from 'express';
+import { type Controller } from '@presentation/protocols/controller';
+import { type HttpRequest } from '@presentation/protocols/http';
 
 export const adaptRoute = (controller: Controller) => {
   return async (req: Request, res: Response) => {
