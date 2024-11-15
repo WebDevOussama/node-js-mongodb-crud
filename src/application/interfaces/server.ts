@@ -1,6 +1,3 @@
-export interface IServer {
+export default interface IServer {
   initializeServer(): Promise<void>;
-  shutDown(): void;
-  getServer(): any;
-  getPort(): string;
 }

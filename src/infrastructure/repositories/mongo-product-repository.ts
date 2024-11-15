@@ -2,7 +2,9 @@ import type { ICreateProductDTO } from '@application/dto/create-product';
 import type { IProductRepository } from '@application/repositories/product-repository';
 import type { Product } from '@domain/entities/product';
 import { ProductModel } from '@infrastructure/models/product-model';
+import { injectable } from 'tsyringe';
 
+@injectable()
 export class MongoProductRepository implements IProductRepository {
   async findAll(): Promise<Product[]> {
     return await ProductModel.find();

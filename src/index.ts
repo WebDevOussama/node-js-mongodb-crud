@@ -1,22 +1,22 @@
-import ExpressServer from '@frameworks/express/express-server';
-import { MongoDBConnection } from '@infrastructure/database/mongodb-connection';
-import dotenv from 'dotenv';
-import AppServer from 'server';
+// eslint-disable-next-line simple-import-sort/imports
+import 'reflect-metadata';
+import type AppServer from 'server';
+import './infrastructure/dependency-injections';
+import { container } from 'tsyringe';
+import loadEnvironment from '@infrastructure/environment';
 
 async function bootstrap() {
-  dotenv.config();
+  loadEnvironment();
 
-  const expressServer = new ExpressServer();
-  const appServer = new AppServer(
-    expressServer,
-    MongoDBConnection.getInstance(),
-  );
+  const logger = container.resolve<ILogger>('Logger');
+  const appServer = container.resolve<AppServer>('AppServer');
 
   try {
     await appServer.initialize();
-    console.log('Server successfully initialized');
+    logger.info('Server successfully initialized');
   } catch (err) {
-    console.error('Failed to initialize the server:', err);
+    logger.error('Failed to initialize the server:', err);
+    // eslint-disable-next-line no-magic-numbers
     process.exit(1);
   }
 }

@@ -38,6 +38,8 @@ export default [
         'error',
         {
           groups: [
+            // Side effect imports (e.g., 'reflect-metadata')
+            ['^\\u0000'],
             // Node.js built-in modules
             [`node:`, `^(${builtinModules.join('|')})(/|$)`],
             // External imports (npm packages)
@@ -60,7 +62,7 @@ export default [
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-magic-numbers': 'warn',
       'no-implicit-globals': 'error',
-      'no-shadow': 'error', // Prevent variable shadowing (important for clean code)
+      'no-shadow': 'error',
     },
   },
   {

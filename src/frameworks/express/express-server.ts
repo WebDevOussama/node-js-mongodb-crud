@@ -1,78 +1,114 @@
-import type { IServer } from '@application/interfaces/server';
-import bodyParser from 'body-parser';
+/* eslint-disable no-magic-numbers */
+import type IServer from '@application/interfaces/server';
 import express from 'express';
-import helmet from 'helmet';
 import type * as http from 'node:http';
+import { inject, injectable } from 'tsyringe';
 import setupRoutes from './routes';
 
+const DEFAULT_PORT = '3000';
+const SHUTDOWN_TIMEOUT_MS = parseInt(
+  process.env.SHUTDOWN_TIMEOUT_MS || '10000',
+  10,
+);
+const ENABLE_MIDDLEWARE_LOGGING =
+  process.env.ENABLE_MIDDLEWARE_LOGGING === 'true';
+
+@injectable()
 export default class ExpressServer implements IServer {
-  private static _serverInstance: ExpressServer;
   private _express: express.Express | undefined;
   private _server: http.Server | undefined;
-  private _port: string = '3000';
+  private readonly _port: string;
 
-  constructor() {}
-
-  public static getInstance() {
-    return this._serverInstance || (this._serverInstance = new this());
+  constructor(
+    @inject('Logger')
+    private readonly logger: ILogger,
+    @inject('Middlewares')
+    private readonly middlewares: express.RequestHandler[],
+  ) {
+    this._port = process.env.PORT ?? DEFAULT_PORT;
   }
 
-  public getServer(): http.Server | null {
-    return this._server || null;
-  }
-
-  public getPort(): string {
-    return this._port;
-  }
-
-  public async initializeServer(
-    ready?: (app: ExpressServer) => void,
-  ): Promise<void> {
+  public async initializeServer(): Promise<void> {
     if (this._express !== undefined) {
-      throw new Error('App already initialized.');
+      const errorMessage = 'App already initialized.';
+      this.logger.error(errorMessage);
+      throw new Error(errorMessage);
     }
 
-    // create express server application
-    this._express = express();
-    this._port = process.env.PORT || '3000';
+    try {
+      // create express server application
+      this._express = express();
 
-    // init middlewares and express components
-    this._express.use(helmet());
-    this._express.use(bodyParser.json());
-    this._express.use(bodyParser.urlencoded({ extended: false }));
+      // Apply injected middlewaresclear
+      this.applyMiddlewares();
 
-    // init routes
-    setupRoutes(this._express);
+      // init routes
+      setupRoutes(this._express);
 
-    // Start server and listen requests 🔥
-    this._server = this._express.listen(this._port, async () => {
-      try {
-        if (ready) ready(this);
-        console.log(`Server is listening on port ${this._port}...`);
-      } catch (err) {
-        console.error('Failed to connect to MongoDB', err);
-        process.exit(1);
-      }
-    });
+      // Start server and listen requests 🔥
+      this._server = this._express.listen(this._port, () => {
+        this.logger.info(`Server is listening on port ${this._port} 🚀✨`);
+      });
+    } catch (error) {
+      this.logger.error('Failed to initialize server:', error);
+      process.exit(1);
+    }
 
-    process.on('SIGTERM', () => this.shutDown());
-    process.on('SIGINT', () => this.shutDown());
+    this.setupSignalHandlers();
   }
 
-  public shutDown() {
+  private applyMiddlewares(): void {
+    try {
+      this.middlewares.forEach((middleware) => {
+        if (this._express) {
+          this._express.use(middleware);
+          if (ENABLE_MIDDLEWARE_LOGGING) {
+            this.logger.info(
+              `Applied middleware: ${middleware.name || 'unknown'}`,
+            );
+          }
+        }
+      });
+    } catch (error) {
+      this.logger.error('Error while applying middlewares:', error);
+      throw error;
+    }
+  }
+
+  private async shutDown() {
     if (!this._server) return;
 
-    this._server.close(() => {
-      console.log('Closing out connections and stopping server...');
-    });
+    this.logger.info('Received shutdown signal, gracefully shutting down...');
 
+    try {
+      // Close the server and handle requests gracefully
+      await new Promise<void>((resolve, reject) => {
+        this._server?.close((err) => {
+          if (err) {
+            this.logger.error('Error while shutting down the server:', err);
+            reject(err);
+          } else {
+            this.logger.info('Closed out remaining connections.');
+            resolve();
+          }
+        });
+      });
+    } catch (error) {
+      this.logger.error('Error during shutdown:', error);
+      process.exit(1);
+    }
+
+    // Forcefully shut down if not graceful within SHUTDOWN_TIMEOUT_MS
     setTimeout(() => {
-      console.error(
+      this.logger.error(
         'Could not close connections in time, forcefully shutting down...',
       );
       process.exit(1);
-    }, 10000);
+    }, SHUTDOWN_TIMEOUT_MS);
+  }
+
+  private setupSignalHandlers(): void {
+    process.on('SIGTERM', async () => await this.shutDown());
+    process.on('SIGINT', async () => await this.shutDown());
   }
 }
-
-export const Server = ExpressServer.getInstance();

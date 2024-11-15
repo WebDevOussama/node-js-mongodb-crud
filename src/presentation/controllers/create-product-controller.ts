@@ -1,12 +1,16 @@
 import type { CreateProductUseCase } from '@application/use-cases/create-product';
+import { inject, injectable } from 'tsyringe';
 import { badRequest, created, serverError } from '../helpers/http-helpers';
 import { type Controller } from '../protocols/controller';
 import { type HttpRequest, type HttpResponse } from '../protocols/http';
 import type { Validator } from '../protocols/validator';
 
+@injectable()
 export class CreateProductController implements Controller {
   constructor(
+    @inject('CreateProductUseCase')
     private readonly createProductUseCase: CreateProductUseCase,
+    @inject('Validator')
     private readonly validator: Validator,
   ) {}
 
