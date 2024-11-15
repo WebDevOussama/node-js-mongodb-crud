@@ -1,6 +1,7 @@
-import { Product } from "@domain/entities/Product";
-import { IProductRepository } from "@application/interfaces/IProductRepository";
-import { ProductModel } from "@infrastructure/models/ProductModel";
+import { Product } from "@domain/entities/product";
+import { IProductRepository } from "@application/repositories/product-repository";
+import { ProductModel } from "@infrastructure/models/product-model";
+import { ICreateProductDTO } from "@application/dto/create-product";
 
 export class MongoProductRepository implements IProductRepository {
   async findAll(): Promise<Product[]> {
@@ -12,7 +13,7 @@ export class MongoProductRepository implements IProductRepository {
     return await ProductModel.findById(id);
   }
 
-  async create(product: Product): Promise<Product> {
+  async create(product: ICreateProductDTO): Promise<Product> {
     const newProduct = new ProductModel(product);
 
     await newProduct.save();

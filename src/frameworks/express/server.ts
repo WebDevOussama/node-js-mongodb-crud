@@ -32,7 +32,7 @@ class AppServer {
 
     // create express server application
     this._express = express();
-    this._port = process.env.PORT || "3001";
+    this._port = process.env.PORT || "3000";
 
     // init middlewares and express components
     this._express.use(helmet());
@@ -45,13 +45,13 @@ class AppServer {
     // Start server and listen requests🔥
     this._server = this._express.listen(this._port, async () => {
       try {
+        if (ready) ready(this);
+        console.log(`Server is listening on port ${this._port}...`);
+
         // MongoDB connection
         const mongoURI = process.env.MONGO_URI as string;
         await mongoose.connect(mongoURI);
         console.log("Connected to MongoDB");
-
-        if (ready) ready(this);
-        console.log(`Server is listening on port ${this._port}...`);
       } catch (err) {
         console.error("Failed to connect to MongoDB", err);
         process.exit(1);

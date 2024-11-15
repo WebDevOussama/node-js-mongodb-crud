@@ -6,12 +6,15 @@ services:
     ports:
       - 27017:27017
     healthcheck:
-      test: 'mongo --host localhost --eval ''db.adminCommand("ping")'' -u username -p password --authenticationDatabase admin || exit 1'
+      test: 'mongo --host localhost --eval ''db.adminCommand("ping")'' -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase admin || exit 1'
       interval: 10s
       timeout: 5s
       retries: 5
     networks:
       - mongo
+    volumes:
+      - mongo-data:/data/db
+
   api:
     build:
       context: .
@@ -26,8 +29,11 @@ services:
     depends_on:
       mongo:
         condition: service_healthy
-
     networks:
       - mongo
+
 networks:
   mongo:
+
+volumes:
+  mongo-data:
