@@ -2,10 +2,11 @@ import express from "express";
 import * as http from "node:http";
 import bodyParser from "body-parser";
 import helmet from "helmet";
+import setupRoutes from "./routes";
 
 class AppServer {
   private static _serverInstance: AppServer;
-  private _express: express.Application | undefined;
+  private _express: express.Express | undefined;
   private _server: http.Server | undefined;
   private _port: string = "3000";
 
@@ -38,7 +39,7 @@ class AppServer {
     this._express.use(bodyParser.urlencoded({ extended: false }));
 
     // init routes
-    this.initHttpRoutes();
+    setupRoutes(this._express);
 
     // start server and listen requests 🔥
     this._server = this._express.listen(this._port, () => {
@@ -50,14 +51,6 @@ class AppServer {
     process.on("SIGINT", () => this.shutDown());
 
     return this;
-  }
-
-  private initHttpRoutes() {
-    if (this._express) {
-      this._express.get("/api/hello", (req, res) => {
-        res.json({ message: "Hello world!" });
-      });
-    }
   }
 
   private shutDown() {
