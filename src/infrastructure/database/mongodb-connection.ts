@@ -25,20 +25,36 @@ export class MongoDBConnection {
       throw err;
     }
   }
-
   private async retryConnection(mongoURI: string, retries = 5): Promise<void> {
-    for (let attempt = 1; attempt <= retries; attempt++) {
+    let attempt = 0;
+
+    while (attempt < retries) {
+      attempt++;
+      const isLastAttempt = attempt === retries;
+
       try {
         await mongoose.connect(mongoURI);
-        return; // Break loop if connected successfully
+        return; // Exit on successful connection
       } catch (err) {
-        console.error(
-          `MongoDB connection attempt ${attempt} failed. Retries left: ${retries - attempt}`,
-        );
+        this.handleConnectionError(err, attempt, isLastAttempt);
 
-        if (attempt === retries) throw err; // Rethrow after all retries
+        if (isLastAttempt) throw err;
         await this.delay(RETRY_TIMEOUT);
       }
+    }
+  }
+
+  private handleConnectionError(
+    err: unknown,
+    attempt: number,
+    isLastAttempt: boolean,
+  ): void {
+    if (isLastAttempt) {
+      console.error(`MongoDB connection failed after ${attempt} attempts.`);
+    } else {
+      console.error(
+        `MongoDB connection attempt ${attempt} failed. Retrying...`,
+      );
     }
   }
 
