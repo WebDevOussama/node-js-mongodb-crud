@@ -1,0 +1,24 @@
+{
+  "name": "mongodb-crud",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx ts-node-dev --respawn --transpile-only src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "helmet": "^8.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.9.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3"
+  }
+}
