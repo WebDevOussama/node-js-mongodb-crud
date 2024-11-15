@@ -12,26 +12,37 @@ export class MongoDBConnection {
   }
 
   public async connect() {
-    let retries = 5;
-    while (retries) {
+    const mongoURI = process.env.MONGO_URI as string;
+
+    try {
+      await this.retryConnection(mongoURI);
+      console.log('MongoDB connected successfully.');
+    } catch (err) {
+      console.error(
+        'Failed to connect to MongoDB after multiple attempts.',
+        err,
+      );
+      throw err;
+    }
+  }
+
+  private async retryConnection(mongoURI: string, retries = 5): Promise<void> {
+    for (let attempt = 1; attempt <= retries; attempt++) {
       try {
-        const mongoURI = process.env.MONGO_URI as string;
         await mongoose.connect(mongoURI);
-        console.log('MongoDB connected successfully.');
-        break;
+        return; // Break loop if connected successfully
       } catch (err) {
-        console.error('MongoDB connection failed', err);
-        // eslint-disable-next-line no-magic-numbers
-        retries -= 1;
-        if (!retries) throw err;
-        await new Promise((resolve) => setTimeout(resolve, RETRY_TIMEOUT));
+        console.error(
+          `MongoDB connection attempt ${attempt} failed. Retries left: ${retries - attempt}`,
+        );
+
+        if (attempt === retries) throw err; // Rethrow after all retries
+        await this.delay(RETRY_TIMEOUT);
       }
     }
   }
 
-  static async close() {
-    await mongoose.disconnect();
-    // Handle graceful shutdown of DB connections
-    console.log('Disconnected from MongoDB');
+  private delay(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }
