@@ -4,6 +4,7 @@ import { ProductModel } from "@infrastructure/models/ProductModel";
 
 export class MongoProductRepository implements IProductRepository {
   async findAll(): Promise<Product[]> {
+    console.log(await ProductModel.find());
     return await ProductModel.find();
   }
 

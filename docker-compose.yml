@@ -1,0 +1,33 @@
+services:
+  mongo:
+    build: ./mongodb
+    restart: always
+    env_file: .env
+    ports:
+      - 27017:27017
+    healthcheck:
+      test: 'mongo --host localhost --eval ''db.adminCommand("ping")'' -u username -p password --authenticationDatabase admin || exit 1'
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mongo
+  api:
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/usr/app
+      - /usr/app/dist
+      - /usr/app/node_modules
+    env_file: .env
+    ports:
+      - "3000:3000"
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+    networks:
+      - mongo
+networks:
+  mongo:

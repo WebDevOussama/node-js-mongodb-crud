@@ -3,6 +3,7 @@ import * as http from "node:http";
 import bodyParser from "body-parser";
 import helmet from "helmet";
 import setupRoutes from "./routes";
+import mongoose from "mongoose";
 
 class AppServer {
   private static _serverInstance: AppServer;
@@ -41,10 +42,20 @@ class AppServer {
     // init routes
     setupRoutes(this._express);
 
-    // start server and listen requests 🔥
-    this._server = this._express.listen(this._port, () => {
-      if (ready) ready(this);
-      return console.log(`Server is listening on port ${this._port}...`);
+    // Start server and listen requests🔥
+    this._server = this._express.listen(this._port, async () => {
+      try {
+        // MongoDB connection
+        const mongoURI = process.env.MONGO_URI as string;
+        await mongoose.connect(mongoURI);
+        console.log("Connected to MongoDB");
+
+        if (ready) ready(this);
+        console.log(`Server is listening on port ${this._port}...`);
+      } catch (err) {
+        console.error("Failed to connect to MongoDB", err);
+        process.exit(1);
+      }
     });
 
     process.on("SIGTERM", () => this.shutDown());
