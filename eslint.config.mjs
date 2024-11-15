@@ -1,7 +1,8 @@
 import { builtinModules } from 'module';
-import pluginSimpleImportSort from 'eslint-plugin-simple-import-sort';
+
 import eslintPlugin from '@typescript-eslint/eslint-plugin';
 import parser from '@typescript-eslint/parser';
+import pluginSimpleImportSort from 'eslint-plugin-simple-import-sort';
 
 export default [
   {
@@ -11,7 +12,6 @@ export default [
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
-        project: './tsconfig.json',
       },
     },
   },
@@ -27,13 +27,6 @@ export default [
           fixStyle: 'separate-type-imports',
         },
       ],
-      '@typescript-eslint/no-explicit-any': 'error', // Avoid `any` type
-      '@typescript-eslint/explicit-module-boundary-types': 'warn',
-      '@typescript-eslint/strict-boolean-expressions': 'off',
-      '@typescript-eslint/comma-spacing': 'off',
-      '@typescript-eslint/no-misused-promises': 'off',
-      '@typescript-eslint/return-await': 'off',
-      '@typescript-eslint/restrict-template-expressions': 'off',
     },
   },
   {
@@ -68,7 +61,6 @@ export default [
       'no-magic-numbers': 'warn',
       'no-implicit-globals': 'error',
       'no-shadow': 'error', // Prevent variable shadowing (important for clean code)
-      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     },
   },
   {

@@ -1,5 +1,5 @@
-import { IServer } from '@application/interfaces/server';
-import { MongoDBConnection } from '@infrastructure/database/mongodb-connection';
+import type { IServer } from '@application/interfaces/server';
+import type { MongoDBConnection } from '@infrastructure/database/mongodb-connection';
 
 export default class AppServer {
   private _server: IServer;

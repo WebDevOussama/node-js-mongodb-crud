@@ -1,7 +1,7 @@
-import AppServer from 'server';
 import ExpressServer from '@frameworks/express/express-server';
 import { MongoDBConnection } from '@infrastructure/database/mongodb-connection';
 import dotenv from 'dotenv';
+import AppServer from 'server';
 
 async function bootstrap() {
   dotenv.config();

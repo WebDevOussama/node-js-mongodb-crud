@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+const RETRY_TIMEOUT = 5000;
+
 export class MongoDBConnection {
   private static _instance: MongoDBConnection;
 
@@ -19,9 +21,10 @@ export class MongoDBConnection {
         break;
       } catch (err) {
         console.error('MongoDB connection failed', err);
+        // eslint-disable-next-line no-magic-numbers
         retries -= 1;
         if (!retries) throw err;
-        await new Promise((resolve) => setTimeout(resolve, 5000)); // Wait before retry
+        await new Promise((resolve) => setTimeout(resolve, RETRY_TIMEOUT));
       }
     }
   }

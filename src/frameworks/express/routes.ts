@@ -1,8 +1,8 @@
-import { Router, type Express } from 'express';
+import { type Express, Router } from 'express';
 import { adaptRoute } from '../adapters/express-adapter';
 import {
-  makeListProducts,
   makeCreateProduct,
+  makeListProducts,
 } from '../factories/product-controllers-factory';
 
 export default (app: Express): void => {

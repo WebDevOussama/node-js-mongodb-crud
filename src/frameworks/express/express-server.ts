@@ -1,9 +1,9 @@
-import express from 'express';
-import * as http from 'node:http';
+import type { IServer } from '@application/interfaces/server';
 import bodyParser from 'body-parser';
+import express from 'express';
 import helmet from 'helmet';
+import type * as http from 'node:http';
 import setupRoutes from './routes';
-import { IServer } from '@application/interfaces/server';
 
 export default class ExpressServer implements IServer {
   private static _serverInstance: ExpressServer;
