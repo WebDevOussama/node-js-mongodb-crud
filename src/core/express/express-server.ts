@@ -8,7 +8,7 @@ import setupRoutes from './routes';
 
 const DEFAULT_PORT = '3000';
 const SHUTDOWN_TIMEOUT_MS = parseInt(
-  process.env.SHUTDOWN_TIMEOUT_MS || '10000',
+  process.env.SHUTDOWN_TIMEOUT_MS ?? '10000',
   10,
 );
 const ENABLE_MIDDLEWARE_LOGGING =

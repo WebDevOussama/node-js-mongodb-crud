@@ -7,7 +7,7 @@ import { inject, injectable } from 'tsyringe';
 export class CreateProductUseCase {
   constructor(
     @inject('IProductRepository')
-    private productRepository: IProductRepository,
+    private readonly productRepository: IProductRepository,
   ) {}
 
   async execute(product: ICreateProductDTO): Promise<Product> {
