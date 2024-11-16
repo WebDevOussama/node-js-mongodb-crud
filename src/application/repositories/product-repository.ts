@@ -1,5 +1,5 @@
 import type { ICreateProductDTO } from '@application/dto/create-product';
-import type { Product } from '@domain/entities/Product';
+import type Product from '@domain/entities/product';
 
 export interface IProductRepository {
   findAll(): Promise<Product[]>;
