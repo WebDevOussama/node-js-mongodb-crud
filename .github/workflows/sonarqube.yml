@@ -23,7 +23,7 @@ jobs:
 
       - name: SonarQube Scan
         env:
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
           SONAR_LOGIN: ${{ secrets.SONAR_TOKEN }}
         run: |
           npm install -g sonarqube-scanner
