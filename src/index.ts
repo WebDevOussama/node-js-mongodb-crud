@@ -1,9 +1,10 @@
 // eslint-disable-next-line simple-import-sort/imports
 import 'reflect-metadata';
 import type AppServer from 'server';
-import './infrastructure/dependency-injections';
+import './infrastructure/di';
 import { container } from 'tsyringe';
-import loadEnvironment from '@infrastructure/environment';
+import loadEnvironment from '@config/env';
+import type { ILogger } from '@config/logger';
 
 async function bootstrap() {
   loadEnvironment();

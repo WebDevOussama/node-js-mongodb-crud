@@ -1,9 +1,11 @@
-import logger from '@infrastructure/logger';
+import type { ILogger } from '@config/logger';
 import bodyParser from 'body-parser';
 import type { RequestHandler } from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { container } from 'tsyringe';
+
+const logger = container.resolve<ILogger>('Logger');
 
 const morganStream = {
   write: (message: string) => {

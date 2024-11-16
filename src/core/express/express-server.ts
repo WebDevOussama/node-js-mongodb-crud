@@ -1,5 +1,6 @@
 /* eslint-disable no-magic-numbers */
-import type IServer from '@application/interfaces/server';
+import type { ILogger } from '@config/logger';
+import type IServer from '@core/interfaces/server';
 import express from 'express';
 import type * as http from 'node:http';
 import { inject, injectable } from 'tsyringe';
@@ -57,17 +58,20 @@ export default class ExpressServer implements IServer {
     this.setupSignalHandlers();
   }
 
+  private logMiddleware(middleware: express.RequestHandler): void {
+    if (ENABLE_MIDDLEWARE_LOGGING) {
+      this.logger.info(`Applied middleware: ${middleware.name || 'unknown'}`);
+    }
+  }
+
   private applyMiddlewares(): void {
     try {
+      if (!this._express) return;
+
       this.middlewares.forEach((middleware) => {
-        if (this._express) {
-          this._express.use(middleware);
-          if (ENABLE_MIDDLEWARE_LOGGING) {
-            this.logger.info(
-              `Applied middleware: ${middleware.name || 'unknown'}`,
-            );
-          }
-        }
+        this._express?.use(middleware);
+
+        this.logMiddleware(middleware);
       });
     } catch (error) {
       this.logger.error('Error while applying middlewares:', error);

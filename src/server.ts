@@ -1,4 +1,4 @@
-import type IServer from '@application/interfaces/server';
+import type IServer from '@core/interfaces/server';
 import type { MongoDBConnection } from '@infrastructure/database/mongodb-connection';
 import { inject, injectable } from 'tsyringe';
 

@@ -12,8 +12,9 @@
     "outDir": "./dist",
     "paths": {
       "@application/*": ["application/*"],
+      "@config/*": ["config/*"],
       "@domain/*": ["domain/*"],
-      "@frameworks/*": ["frameworks/*"],
+      "@core/*": ["core/*"],
       "@infrastructure/*": ["infrastructure/*"],
       "@presentation/*": ["presentation/*"]
     }

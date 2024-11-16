@@ -1,3 +1,4 @@
+import type { ILogger } from '@config/logger';
 import mongoose from 'mongoose';
 import { inject, singleton } from 'tsyringe';
 

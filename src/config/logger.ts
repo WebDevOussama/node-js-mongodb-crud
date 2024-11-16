@@ -1,6 +1,11 @@
 import { createLogger, format, transports } from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 
+interface ILogger {
+  info(message: string): void;
+  error(message: string, error?: any): void;
+}
+
 const {
   combine,
   printf,
@@ -26,4 +31,9 @@ const logger = createLogger({
   ],
 });
 
-export default logger;
+const loggerAdapter: ILogger = {
+  info: (message: string) => logger.info(message),
+  error: (message: string, error?: any) => logger.error(message, error),
+};
+
+export { ILogger, loggerAdapter };

@@ -109,3 +109,64 @@
     at Server.emit (node:events:519:28)
     at emitCloseNT (node:net:2340:8)
     at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+2024-11-15T21:55:20.761Z [info]: Applied middleware: helmetMiddleware
+2024-11-15T21:55:20.762Z [info]: Applied middleware: jsonParser
+2024-11-15T21:55:20.762Z [info]: Applied middleware: urlencodedParser
+2024-11-15T21:55:20.762Z [info]: Applied middleware: logger
+2024-11-15T21:55:20.771Z [info]: Server is listening on port 3000 🚀✨
+2024-11-15T21:55:20.807Z [info]: MongoDB connected successfully.
+2024-11-15T21:55:20.807Z [info]: Server successfully initialized
+2024-11-15T22:02:05.418Z [info]: Received shutdown signal, gracefully shutting down...
+2024-11-15T22:02:05.419Z [info]: Closed out remaining connections.
+2024-11-15T22:02:11.009Z [info]: Applied middleware: helmetMiddleware
+2024-11-15T22:02:11.010Z [info]: Applied middleware: jsonParser
+2024-11-15T22:02:11.010Z [info]: Applied middleware: urlencodedParser
+2024-11-15T22:02:11.010Z [info]: Applied middleware: logger
+2024-11-15T22:02:11.020Z [info]: Server is listening on port 3000 🚀✨
+2024-11-15T22:02:11.081Z [info]: MongoDB connected successfully.
+2024-11-15T22:02:11.081Z [info]: Server successfully initialized
+2024-11-15T22:03:12.869Z [info]: Received shutdown signal, gracefully shutting down...
+2024-11-15T22:03:12.871Z [info]: Closed out remaining connections.
+2024-11-15T22:03:18.445Z [info]: Applied middleware: helmetMiddleware
+2024-11-15T22:03:18.446Z [info]: Applied middleware: jsonParser
+2024-11-15T22:03:18.446Z [info]: Applied middleware: urlencodedParser
+2024-11-15T22:03:18.446Z [info]: Applied middleware: logger
+2024-11-15T22:03:18.455Z [info]: Server is listening on port 3000 🚀✨
+2024-11-15T22:03:18.472Z [info]: MongoDB connected successfully.
+2024-11-15T22:03:18.472Z [info]: Server successfully initialized
+2024-11-15T22:03:27.864Z [info]: Received shutdown signal, gracefully shutting down...
+2024-11-15T22:03:27.866Z [info]: Closed out remaining connections.
+2024-11-15T22:03:33.413Z [info]: Applied middleware: helmetMiddleware
+2024-11-15T22:03:33.414Z [info]: Applied middleware: jsonParser
+2024-11-15T22:03:33.414Z [info]: Applied middleware: urlencodedParser
+2024-11-15T22:03:33.414Z [info]: Applied middleware: logger
+2024-11-15T22:03:33.423Z [info]: Server is listening on port 3000 🚀✨
+2024-11-15T22:03:33.440Z [info]: MongoDB connected successfully.
+2024-11-15T22:03:33.440Z [info]: Server successfully initialized
+2024-11-15T22:05:03.276Z [info]: Received shutdown signal, gracefully shutting down...
+2024-11-15T22:05:03.279Z [info]: Closed out remaining connections.
+2024-11-15T22:05:08.880Z [info]: Applied middleware: helmetMiddleware
+2024-11-15T22:05:08.881Z [info]: Applied middleware: jsonParser
+2024-11-15T22:05:08.881Z [info]: Applied middleware: urlencodedParser
+2024-11-15T22:05:08.881Z [info]: Applied middleware: logger
+2024-11-15T22:05:08.891Z [info]: Server is listening on port 3000 🚀✨
+2024-11-15T22:05:08.910Z [info]: MongoDB connected successfully.
+2024-11-15T22:05:08.910Z [info]: Server successfully initialized
+2024-11-15T22:12:33.666Z [info]: Received shutdown signal, gracefully shutting down...
+2024-11-15T22:12:33.669Z [info]: Closed out remaining connections.
+2024-11-15T22:12:39.256Z [info]: Applied middleware: helmetMiddleware
+2024-11-15T22:12:39.257Z [info]: Applied middleware: jsonParser
+2024-11-15T22:12:39.257Z [info]: Applied middleware: urlencodedParser
+2024-11-15T22:12:39.257Z [info]: Applied middleware: logger
+2024-11-15T22:12:39.266Z [info]: Server is listening on port 3000 🚀✨
+2024-11-15T22:12:39.283Z [info]: MongoDB connected successfully.
+2024-11-15T22:12:39.284Z [info]: Server successfully initialized
+2024-11-15T22:16:38.832Z [info]: Received shutdown signal, gracefully shutting down...
+2024-11-15T22:16:38.833Z [info]: Closed out remaining connections.
+2024-11-15T22:20:13.043Z [info]: Applied middleware: helmetMiddleware
+2024-11-15T22:20:13.044Z [info]: Applied middleware: jsonParser
+2024-11-15T22:20:13.044Z [info]: Applied middleware: urlencodedParser
+2024-11-15T22:20:13.044Z [info]: Applied middleware: logger
+2024-11-15T22:20:13.054Z [info]: Server is listening on port 3000 🚀✨
+2024-11-15T22:20:13.072Z [info]: MongoDB connected successfully.
+2024-11-15T22:20:13.072Z [info]: Server successfully initialized

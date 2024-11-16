@@ -10,3 +10,18 @@
     at Server.emit (node:events:519:28)
     at emitCloseNT (node:net:2340:8)
     at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+2024-11-16T12:20:59.531Z [error]: MongooseServerSelectionError: getaddrinfo ENOTFOUND mongo
+    at _handleConnectionErrors (/Users/oussamatrabelsi/Desktop/projects/node-js-mongodb-crud/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/Users/oussamatrabelsi/Desktop/projects/node-js-mongodb-crud/node_modules/mongoose/lib/connection.js:860:11)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at listOnTimeout (node:internal/timers:545:9)
+    at process.processTimers (node:internal/timers:519:7)
+    at async MongoDBConnection.connect (/Users/oussamatrabelsi/Desktop/projects/node-js-mongodb-crud/src/infrastructure/database/mongodb-connection.ts:11:7)
+    at async AppServer.initialize (/Users/oussamatrabelsi/Desktop/projects/node-js-mongodb-crud/src/server.ts:15:5)
+    at async bootstrap (/Users/oussamatrabelsi/Desktop/projects/node-js-mongodb-crud/src/index.ts:15:5)
+2024-11-16T12:21:30.490Z [error]: Error [ERR_SERVER_NOT_RUNNING]: Server is not running.
+    at Server.close (node:net:2280:12)
+    at Object.onceWrapper (node:events:633:28)
+    at Server.emit (node:events:519:28)
+    at emitCloseNT (node:net:2340:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:81:21)

@@ -1,21 +1,30 @@
-import type IEnvConfig from '@application/interfaces/env-config';
 import dotenv from 'dotenv';
+
+interface IEnvConfig {
+  PORT: string;
+  MONGO_INITDB_ROOT_USERNAME: string;
+  MONGO_INITDB_ROOT_PASSWORD: string;
+  MONGO_INITDB_DATABASE: string;
+  MONGO_REPLICA_HOST: string;
+  MONGO_REPLICA_PORT: string;
+  MONGO_URI: string;
+}
+
+const REQUIRED_ENV = [
+  'PORT',
+  'MONGO_INITDB_ROOT_USERNAME',
+  'MONGO_INITDB_ROOT_PASSWORD',
+  'MONGO_INITDB_DATABASE',
+  'MONGO_REPLICA_HOST',
+  'MONGO_REPLICA_PORT',
+  'MONGO_URI',
+  'SHUTDOWN_TIMEOUT_MS',
+];
 
 dotenv.config();
 
-export default function loadEnvironment(): IEnvConfig {
-  const requiredVariables = [
-    'PORT',
-    'MONGO_INITDB_ROOT_USERNAME',
-    'MONGO_INITDB_ROOT_PASSWORD',
-    'MONGO_INITDB_DATABASE',
-    'MONGO_REPLICA_HOST',
-    'MONGO_REPLICA_PORT',
-    'MONGO_URI',
-    'SHUTDOWN_TIMEOUT_MS',
-  ];
-
-  requiredVariables.forEach((variable) => {
+export default function loadEnv(): IEnvConfig {
+  REQUIRED_ENV.forEach((variable) => {
     if (!process.env[variable]) {
       throw new Error(
         `Environment variable ${variable} is required but not set.`,
