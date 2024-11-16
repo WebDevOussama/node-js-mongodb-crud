@@ -1,4 +1,6 @@
 import type { Config } from 'jest';
+import { pathsToModuleNameMapper } from 'ts-jest';
+import { compilerOptions } from './tsconfig.json';
 
 const config: Config = {
   preset: 'ts-jest',
@@ -13,12 +15,9 @@ const config: Config = {
     '!src/**/__tests__/**',
     '!src/**/index.ts',
   ],
-  moduleNameMapper: {
-    '^@application/(.*)$': '<rootDir>/src/application/$1',
-    '^@domain/(.*)$': '<rootDir>/src/domain/$1',
-    '^@infrastructure/(.*)$': '<rootDir>/src/infrastructure/$1',
-    '^@core/(.*)$': '<rootDir>/src/core/$1',
-  },
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
+    prefix: '<rootDir>/src/',
+  }),
 };
 
 export default config;

@@ -10,6 +10,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "removeComments": true,
+    "resolveJsonModule": true,
     "outDir": "./dist",
     "paths": {
       "@application/*": ["application/*"],
