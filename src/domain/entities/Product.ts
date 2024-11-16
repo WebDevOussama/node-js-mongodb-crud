@@ -1,4 +1,4 @@
-export default class Product {
+export class Product {
   constructor(
     public readonly id: string,
     public name: string,
