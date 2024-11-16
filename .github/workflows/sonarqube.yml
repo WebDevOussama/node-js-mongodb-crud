@@ -23,11 +23,11 @@ jobs:
 
       - name: SonarQube Scan
         env:
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-          SONAR_LOGIN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST: ${{ secrets.SONAR_HOST }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           npm install -g sonarqube-scanner
           sonar-scanner \
-            -Dsonar.host.url=${{ env.SONAR_HOST_URL }} \
-            -Dsonar.login=${{ env.SONAR_LOGIN }} \
+            -Dsonar.host.url=${{ env.SONAR_HOST }} \
+            -Dsonar.token=${{ env.SONAR_TOKEN }} \
             -Dsonar.projectKey=node_mongo_crud
