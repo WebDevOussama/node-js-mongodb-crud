@@ -23,8 +23,11 @@ jobs:
 
       - name: SonarQube Scan
         env:
-          SONAR_HOST_URL: http://192.168.31.156:9000
-          SONAR_LOGIN: squ_3f2979f274c5e58030440ab0aaebdce23c063a6d
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_LOGIN: ${{ secrets.SONAR_TOKEN }}
         run: |
           npm install -g sonarqube-scanner
-          sonar-scanner
+          sonar-scanner \
+            -Dsonar.host.url=${{ env.SONAR_HOST_URL }} \
+            -Dsonar.login=${{ env.SONAR_LOGIN }} \
+            -Dsonar.projectKey=node_mongo_crud
