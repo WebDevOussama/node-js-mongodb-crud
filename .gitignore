@@ -1,2 +1,18 @@
-node_modules
+# Node.js related
+node_modules/
+dist/ 
+
+# Environment variables
 .env
+.env.*
+.env.*.local
+
+# Coverage reports
+coverage/
+
+# Editor specific
+.vscode/
+.idea/
+
+# MacOS related
+.DS_Store
