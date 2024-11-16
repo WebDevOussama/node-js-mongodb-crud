@@ -1,6 +1,6 @@
 import type { ICreateProductDTO } from '@application/dto/create-product';
 import type { IProductRepository } from '@application/repositories/product-repository';
-import type Product from '@domain/entities/product';
+import type Product from '@domain/entities/Product';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()
