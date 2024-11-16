@@ -4,10 +4,19 @@
   "main": "index.ts",
   "scripts": {
     "dev": "npx tsx watch src/index.ts",
-    "build": "tsx",
+    "build": "tsc",
+    "start": "node dist/index.js",
     "lint": "eslint ./src",
     "format": "prettier --write .",
     "test": "jest"
+  },
+  "_moduleAliases": {
+    "@application": "dist/application",
+    "@config": "dist/config",
+    "@domain": "dist/domain",
+    "@core": "dist/core",
+    "@infrastructure": "dist/infrastructure",
+    "@presentation": "dist/presentation"
   },
   "dependencies": {
     "@types/mongoose": "^5.11.96",
@@ -15,6 +24,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "helmet": "^8.0.0",
+    "module-alias": "^2.2.3",
     "mongoose": "^8.8.1",
     "morgan": "^1.10.0",
     "reflect-metadata": "^0.2.2",

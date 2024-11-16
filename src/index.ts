@@ -1,4 +1,5 @@
 // eslint-disable-next-line simple-import-sort/imports
+import 'module-alias/register';
 import 'reflect-metadata';
 import type AppServer from 'server';
 import './infrastructure/di';

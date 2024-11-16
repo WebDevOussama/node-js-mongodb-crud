@@ -16,7 +16,7 @@ const config: Config = {
     '!src/**/index.ts',
   ],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
-    prefix: '<rootDir>/src/$1',
+    prefix: '<rootDir>/src',
   }),
   moduleDirectories: ['node_modules', '<rootDir>/src'],
 };

@@ -1,6 +1,6 @@
 import ExpressServer from '@core/express/express-server';
-import AppServer from 'server';
 import { container } from 'tsyringe';
+import AppServer from '../../server';
 
 container.registerSingleton('ExpressServer', ExpressServer);
 
