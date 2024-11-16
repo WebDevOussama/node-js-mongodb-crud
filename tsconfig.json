@@ -9,6 +9,7 @@
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "removeComments": true,
     "outDir": "./dist",
     "paths": {
       "@application/*": ["application/*"],
@@ -18,9 +19,6 @@
       "@infrastructure/*": ["infrastructure/*"],
       "@presentation/*": ["presentation/*"]
     }
-  },
-  "ts-node": {
-    "require": ["tsconfig-paths/register"]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
