@@ -1,5 +1,6 @@
 {
   "name": "mongodb-crud",
+  "author": "Oussama Trabelsi",
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
@@ -8,10 +9,6 @@
     "lint": "eslint ./src",
     "format": "prettier --write ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "@types/mongoose": "^5.11.96",
     "body-parser": "^1.20.3",
