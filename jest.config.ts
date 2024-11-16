@@ -18,7 +18,6 @@ const config: Config = {
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: '<rootDir>/src',
   }),
-  moduleDirectories: ['node_modules', '<rootDir>/src'],
 };
 
 export default config;
