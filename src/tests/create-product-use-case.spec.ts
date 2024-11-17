@@ -1,7 +1,7 @@
 import type { ICreateProductDTO } from '@application/dto/create-product';
 import type { IProductRepository } from '@application/repositories/product-repository';
 import { CreateProductUseCase } from '@application/use-cases/create-product';
-import { Product } from '@domain/entities/Product';
+import { Product } from '@domain/entities/product';
 
 describe('CreateProductUseCase', () => {
   let productRepository: jest.Mocked<IProductRepository>;
